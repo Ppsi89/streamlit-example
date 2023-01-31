@@ -1,38 +1,62 @@
-from collections import namedtuple
-import altair as alt
-import math
-import pandas as pd
 import streamlit as st
 
-"""
-# Welcome to Streamlit!
+# Page 1: Introduction and main contribution
+st.title("Multipage Summary")
+st.write("This is a multipage summary of a Python code project.")
+st.write("The following pages will cover the main contribution, model changes, results, and fitting processes.")
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
+# Page 2: Model changes
+def model_changes():
+    st.write("Model Changes")
+    changed = st.checkbox("Have you changed the model since the last iteration?")
+    if changed:
+        st.write("Details of the changes made to the model:")
+        st.write("[insert details here]")
+    else:
+        st.write("The model has not been changed since the last iteration.")
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+# Page 3: Results and benchmark comparison
+def results_and_comparison():
+    st.write("Results and Benchmark Comparison")
+    st.write("Results obtained:")
+    st.write("[insert results here]")
+    st.write("Comparison with benchmark:")
+    st.write("[insert comparison here]")
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+# Page 4: Goals and fitting processes
+def goals_and_fitting_processes():
+    st.write("Goals and Fitting Processes")
+    st.write("For each of the project's goals, detail how they were achieved or not:")
+    st.write("[insert details here]")
+    st.write("In which process(es) can your model fit?")
+    st.write("[insert fitting process details here]")
 
+# Page 5: Conclusion
+def conclusion():
+    st.write("Conclusion")
+    st.write("[insert conclusion here]")
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+# Main menu
+def main():
+    st.write("Main Menu")
+    menu = ["Introduction and Main Contribution", "Model Changes", "Results and Benchmark Comparison", "Goals and Fitting Processes", "Conclusion"]
+    choice = st.sidebar.selectbox("Select a page:", menu)
 
-    Point = namedtuple('Point', 'x y')
-    data = []
+    if choice == "Introduction and Main Contribution":
+        st.write("Main Contribution:")
+        st.write("[insert main contribution details here]")
 
-    points_per_turn = total_points / num_turns
+    elif choice == "Model Changes":
+        model_changes()
 
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
+    elif choice == "Results and Benchmark Comparison":
+        results_and_comparison()
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+    elif choice == "Goals and Fitting Processes":
+        goals_and_fitting_processes()
+
+    elif choice == "Conclusion":
+        conclusion()
+
+if __name__ == '__main__':
+    main()
